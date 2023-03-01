@@ -324,7 +324,10 @@ local Section = Tab:AddSection({
         Name = "Stopwatch"
 })
 
-local stopwatchButton = Tab:AddButton({
+local stopwatchRunning = false
+local startTime = tick()
+
+Tab:AddButton({
     Name = "Start Stopwatch",
     Callback = function()
         stopwatchStartTime = tick()
@@ -336,21 +339,37 @@ Tab:AddButton({
     Name = "Stop Stopwatch",
     Callback = function()
         stopwatchRunning = false
+        startTime = tick()
     end
 })
 
-Tab:AddLabel({
-    Name = "Stopwatch: 0 seconds",
-    TextDisappear = false
+Tab:AddSlider({
+    Name = "Elapsed Time (Don't Touch)",
+    Min = 0,
+    Max = 60,
+    Default = 0,
     Color = Color3.fromRGB(218,73,0),
+    Increment = 0.01,
+    ValueName = "Seconds"
 })
 
 game:GetService("RunService").Heartbeat:Connect(function()
     if stopwatchRunning then
-        local elapsedTime = tick() - stopwatchStartTime
-        stopwatchLabel:SetText("Stopwatch: " .. tostring(math.floor(elapsedTime)) .. " seconds")
+        local elapsedTime = tick() - startTime
+        local seconds = math.floor(elapsedTime)
+        local milliseconds = math.floor((elapsedTime - seconds) * 1000)
+        local roundedMilliseconds = math.round(milliseconds / 10) * 10 -- round to nearest hundredths
+        if roundedMilliseconds == 1000 then
+            seconds = seconds + 1
+            roundedMilliseconds = 0
+        end
+        local formattedTime = string.format("%d.%02d seconds", seconds, roundedMilliseconds)
+        game:GetService("Chat"):Chat(game.Players.LocalPlayer.Character.Head, "Elapsed Time: " .. formattedTime)
+    else
+        startTime = tick()
     end
 end)
+
 
 
 
