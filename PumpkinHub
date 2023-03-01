@@ -314,8 +314,14 @@ Tab:AddButton({
   	end    
 })
 
+local Tab = Window:MakeTab({
+	Name = "WorldTiming",
+	Icon = "rbxassetid://",
+	PremiumOnly = false
+})
+
 local Section = Tab:AddSection({
-        Name = "Timing"
+        Name = "Stopwatch"
 })
 
 local stopwatchButton = Tab:AddButton({
@@ -326,9 +332,9 @@ local stopwatchButton = Tab:AddButton({
     end
 })
 
-local stopwatchLabel = Tab:AddLabel({
+Tab:AddLabel({
     Name = "Stopwatch: 0 seconds",
-    TextSize = 18,
+    
 })
 
 game:GetService("RunService").Heartbeat:Connect(function()
