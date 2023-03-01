@@ -314,7 +314,7 @@ Tab:AddButton({
   	end    
 })
 
-local Tab:AddSection({
+local Section = Tab:AddSection({
         Name = "Timing"
 })
 
