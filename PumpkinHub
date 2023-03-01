@@ -332,9 +332,17 @@ local stopwatchButton = Tab:AddButton({
     end
 })
 
+Tab:AddButton({
+    Name = "Stop Stopwatch",
+    Callback = function()
+        stopwatchRunning = false
+    end
+})
+
 Tab:AddLabel({
     Name = "Stopwatch: 0 seconds",
-    
+    TextDisappear = false
+    Color = Color3.fromRGB(218,73,0),
 })
 
 game:GetService("RunService").Heartbeat:Connect(function()
@@ -344,12 +352,7 @@ game:GetService("RunService").Heartbeat:Connect(function()
     end
 end)
 
-Tab:AddButton({
-    Name = "Stop Stopwatch",
-    Callback = function()
-        stopwatchRunning = false
-    end
-})
+
 
 
 
