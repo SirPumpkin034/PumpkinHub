@@ -315,7 +315,7 @@ Tab:AddButton({
 })
 
 local Tab = Window:MakeTab({
-	Name = "WorldTiming",
+	Name = "Timing",
 	Icon = "rbxassetid://",
 	PremiumOnly = false
 })
